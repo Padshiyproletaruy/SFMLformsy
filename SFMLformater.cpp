@@ -10,9 +10,41 @@ int main()
     const std::string pathFront = "C:\Windows\Fonts\Arial\arialbd.ttf";
     sf::Font font;
     sf::Text text;
+    sf::Text fieldMm;
+    sf::Text fieldSm;
+    sf::Text fieldDm;
+    sf::Text fieldM;
+    sf::Text fieldKm;
+    
     vector<sf::RectangleShape> btns;
     vector<sf::Text> btntext;
+    vector<sf::Text> fileds[5];
+    vector<sf::RectangleShape> filedback[5];
+    vector<sf::Text> filedsname[5];
+    vector<sf::String> names = { "Mm","Sm","Dm","M","Km" };
+    bool filedsstatus[5]{0};
     const sf::Vector2f size_btf{ 50.f,30.f };
+    const sf::Vector2f size_filed{ 300.f,30.f };
+    for (int i{ 0 }; i < 5; i++)
+    {
+        sf::RectangleShape back(size_filed);
+        sf::Text textname;
+        text.setFont(font);
+        text.setCharacterSize(10);
+        text.setString("0");
+        text.setFillColor(sf::Color::Black);
+        text.setFont(font);
+        text.setCharacterSize(10);
+        text.setString("0");
+        text.setFillColor(sf::Color::Black);
+  
+        sf::RectangleShape back(sf::Vector2f{ 50.f,30.f });
+        back.setPosition(sf::Vector2f{ float(i) * 60,110 });
+        filedback.push_back(back);
+
+
+    }
+
 
     for (int i{ 0 }; i < 10; i++) {
         sf::RectangleShape btn(sf::Vector2f{ 50.f,30.f });
@@ -63,6 +95,21 @@ int main()
                 {
                     btns[i].setFillColor(sf::Color::Green);
                 }
+            }
+
+            for (int i{ 0 }; i < fields.size(); i++)
+            {
+                if (mousePosition.x >= fields[i].getPosition().x &&
+                    mousePosition.x <= fields[i].getPosition().x + size_btf.x &&
+                    mousePosition.y >= fields[i].getPosition().y &&
+                    mousePosition.y <= fields[i].getPosition().y + size_btf.y)
+                {
+                    for (int i = 0; i < fields.size(); i++) {
+                        filedsstatus[i] = 0;
+                    }
+                    filedsstatus[i] = 1;
+                }
+            }
             }
         }
        
